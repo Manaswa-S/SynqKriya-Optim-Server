@@ -35,12 +35,12 @@ func newLog(severity LogSeverity, logStr string) {
 		regularLogPath := "./logs/midoptim.log"
 		err = os.MkdirAll(regularLogPath, 0644)
 		if err != nil {
-			log.Fatalf("failed to create regular.log : %v", err)
+			log.Fatalf("failed to create midoptim.log : %v", err)
 		}
 
 		logFile, err = os.OpenFile(regularLogPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			log.Fatalf("failed to open regular.log : %v", err)
+			log.Fatalf("failed to open midoptim.log : %v", err)
 		}
 	}
 
