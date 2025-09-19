@@ -1,0 +1,22 @@
+edition = "2023";
+
+option features.field_presence = IMPLICIT;
+option go_package = "./rpcserver";
+
+package rpcserver;
+
+// The service definition.
+service PreOptimService {
+  // First RPC: SayHello
+  rpc AddCamera (AddCameraReq) returns (AddCameraResp);
+}
+
+// The request message for SayHello.
+message AddCameraReq {
+  string cameraId = 1;
+}
+
+// The response message for SayHello.
+message AddCameraResp {
+  string message = 1;
+}
