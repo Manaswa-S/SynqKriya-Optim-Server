@@ -128,58 +128,58 @@ func (s *MidOptim) processMetrics(data *YoloDSReq) error {
 
 func (s *MidOptim) calcMetrics(data *YoloDSReq) (*MetricsResult, error) {
 
-	// classMap := make(map[string]int64)
-	// for _, summary := range data.ProcessedSummary.FrameSummaries {
-	// 	for class, count := range summary.ClassCounts {
-	// 		classMap[class] = max(classMap[class], count)
-	// 	}
-	// }
+	classMap := make(map[string]int64)
+	for _, summary := range data.ProcessedSummary.FrameSummaries {
+		for class, count := range summary.ClassCounts {
+			classMap[class] = max(classMap[class], count)
+		}
+	}
 
-	// s.Manager.occupancyMap[data.CameraId] = max(data.ProcessedSummary.TotalVehicles, s.Manager.occupancyMap[data.CameraId])
-	// var occupancy float32
-	// if s.Manager.occupancyMap[data.CameraId] == 0 {
-	// 	occupancy = float32(data.ProcessedSummary.TotalVehicles)
-	// } else {
-	// 	occupancy = float32(data.ProcessedSummary.TotalVehicles) / float32(s.Manager.occupancyMap[data.CameraId])
-	// }
+	s.Manager.occupancyMap[data.Info.CameraId] = max(data.ProcessedSummary.TotalVehicles, s.Manager.occupancyMap[data.Info.CameraId])
+	var occupancy float32
+	if s.Manager.occupancyMap[data.Info.CameraId] == 0 {
+		occupancy = float32(data.ProcessedSummary.TotalVehicles)
+	} else {
+		occupancy = float32(data.ProcessedSummary.TotalVehicles) / float32(s.Manager.occupancyMap[data.Info.CameraId])
+	}
 
-	// flowRate := data.ProcessedSummary.TotalVehicles / data.Frame.Duration
+	flowRate := data.ProcessedSummary.TotalVehicles / data.Meta.Duration
 
-	// speedSum := float32(0)
-	// for _, summary := range data.ProcessedSummary.FrameSummaries {
-	// 	speedSum += summary.AvgSpeed
-	// }
-	// avgSpeed := speedSum / float32(data.ProcessedSummary.TotalVehicles)
+	speedSum := float32(0)
+	for _, summary := range data.ProcessedSummary.FrameSummaries {
+		speedSum += summary.AvgSpeed
+	}
+	avgSpeed := speedSum / float32(data.ProcessedSummary.TotalVehicles)
 
-	// totalWait := float32(0)
-	// for _, stat := range data.ProcessedSummary.VehicleStats {
-	// 	totalWait += (stat.ExitTime - stat.ArrivalTime)
-	// }
-	// avgWaitTime := totalWait / float32(data.ProcessedSummary.TotalVehicles)
+	totalWait := float32(0)
+	for _, stat := range data.ProcessedSummary.VehicleStats {
+		totalWait += (stat.ExitTime - stat.ArrivalTime)
+	}
+	avgWaitTime := totalWait / float32(data.ProcessedSummary.TotalVehicles)
 
-	// return &MidOptimOutput{
-	// 	UUID:       data.UUID,
-	// 	JobId:      data.JobId,
-	// 	JunctionId: data.JunctionId,
-	// 	CameraId:   data.CameraId,
-	// 	TimeStamp:  data.TimeStamp,
+	return &MetricsResult{
+		Info: JobInfo{
+			UUID:       data.Info.UUID,
+			JobId:      data.Info.JobId,
+			JunctionId: data.Info.JunctionId,
+			CameraId:   data.Info.CameraId,
+			TimeStamp:  data.Info.TimeStamp,
+		},
 
-	// 	Frame: data.Frame,
+		Meta: data.Meta,
 
-	// 	Metrics: Metrics{
-	// 		VehiclesCount: classMap,
-	// 		Occupancy:     occupancy,
-	// 		FlowRate:      flowRate,
-	// 		AvgSpeed:      avgSpeed,
-	// 		AvgWaitTime:   int64(avgWaitTime),
-	// 	},
-	// 	RoadType:   "",
-	// 	Confidence: 0.0,
+		Metrics: ClipMetrics{
+			VehiclesCount: classMap,
+			Occupancy:     occupancy,
+			FlowRate:      flowRate,
+			AvgSpeed:      avgSpeed,
+			AvgWaitTime:   int64(avgWaitTime),
+			RoadType:      "",
+			Confidence:    100.0, // TODO:
+		},
 
-	// 	SystemMeta: data.SystemMeta,
-	// }, nil
-
-	return &MetricsResult{}, nil
+		SystemMeta: data.SystemMeta,
+	}, nil
 }
 
 func (s *MidOptim) publishMetrics(metrics *MetricsResult) error {
