@@ -30,7 +30,7 @@ It acts as the backbone connecting:
 The Optimization Server is split into **three independent Go microservices**, communicating exclusively through **Redis Pub/Sub**.
 Each stage is isolated, asynchronous, and independently scalable.
 
-#### Architecture Diagram 
+### Architecture Diagram 
 <img width="800px" height="500px" src="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/arch.jpg" >
 
 ---
@@ -156,7 +156,7 @@ Handles final decisions, applies policies and makes them durable.
 - Fully asynchronous processing
 - Independent scalability per service
 - Delta-based decision propagation to reduce noise and recomputation
-- Built as a production-oriented backend system, not an academic ML demo
+- Built as a production-oriented backend system
 
 ---
 
@@ -179,5 +179,5 @@ Those components interact with this system externally.
 
 ### Disclaimer
 
-This project was developed as part of A smart traffic management system.
+This project was developed as part of a smart traffic management system.
 It is not deployed in production and has not undergone real-world traffic validation.
