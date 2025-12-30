@@ -1,9 +1,5 @@
 # SynqKriya – Optimization Server
 ### Backend orchestration layer for an ML-based smart traffic management system.
----
-
-This repository contains **only the Optimization Server**, responsible for data ingestion, coordination, metric computation, and persistence.
-<br>
 The system is designed as a **decoupled, event-driven pipeline** that connects live traffic cameras with ML inference and decision-making components.
 
 ---
@@ -17,10 +13,12 @@ The system is designed as a **decoupled, event-driven pipeline** that connects l
 The complete SynqKriya system consists of three major parts:
 
 1. **Optimization Server** (this repository)
-2. **Detection & Tracking ML Model** (YOLOv8-based, external)
+2. **Detection & Tracking ML Model** (external)
 3. **Decision-Making ML Model** (external)
 
-This repo implements the **Optimization Server**, which acts as the backbone connecting:
+This repo implements the **Optimization Server**, responsible for data ingestion, coordination, metric computation, and persistence.
+<br>
+It acts as the backbone connecting:
 - live RTSP camera feeds
 - ML inference components
 - downstream storage and post-processing
@@ -88,12 +86,11 @@ Acts as a semantic bridge between raw ML inference and decision-making.
 **Behavior**
 - Subscribes to detection model output channel
 - Converts raw inference into structured traffic metrics
-
-Computed metrics include:
-- vehicle count
-- traffic density
-- congestion indicators
-- flow-related metrics
+- Computed metrics include:
+  - vehicle count
+  - traffic density
+  - congestion indicators
+  - flow-related metrics
 
 - Demo Output: <a href="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/outputs/midoptim-decision.json"> Link </a>
 
@@ -136,7 +133,7 @@ Handles final decisions, applies policies and makes them durable.
 
 ---
 
-## Tech Stack
+### Tech Stack
 
 - **Language:** Go
 - **Concurrency:** Goroutines, centralized schedulers
@@ -153,7 +150,7 @@ Handles final decisions, applies policies and makes them durable.
 
 ---
 
-## Design Characteristics
+### Design Characteristics
 
 - Strong stage-wise decoupling using Redis
 - Fully asynchronous processing
@@ -163,7 +160,7 @@ Handles final decisions, applies policies and makes them durable.
 
 ---
 
-## Scope & Positioning
+### Scope & Positioning
 
 This repository focuses on:
 - systems engineering
@@ -180,7 +177,7 @@ Those components interact with this system externally.
 
 ---
 
-## Disclaimer
+### Disclaimer
 
 This project was developed as part of A smart traffic management system.
 It is not deployed in production and has not undergone real-world traffic validation.
