@@ -157,23 +157,10 @@ Handles final decisions, applies policies and makes them durable.
 - Independent scalability per service
 - Delta-based decision propagation to reduce noise and recomputation
 - Built as a production-oriented backend system
-
----
-
-### Scope & Positioning
-
-This repository focuses on:
-- systems engineering
-- data pipelines
-- service coordination
-- real-time ingestion and persistence
-
-It intentionally does **not** include:
-- ML model training
-- ML inference logic
-- traffic optimization algorithms
-
-Those components interact with this system externally.
+- It intentionally does **not** include:
+    - ML models
+    - traffic optimization algorithms
+    - Those components interact with this system externally.
 
 ---
 
