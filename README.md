@@ -150,20 +150,6 @@ Handles final decisions, applies policies and makes them durable.
 
 ---
 
-### Design Characteristics
-
-- Strong stage-wise decoupling using Redis
-- Fully asynchronous processing
-- Independent scalability per service
-- Delta-based decision propagation to reduce noise and recomputation
-- Built as a production-oriented backend system
-- It intentionally does **not** include:
-    - ML models
-    - traffic optimization algorithms
-    - Those components interact with this system externally.
-
----
-
 ### Disclaimer
 
 This project was developed as part of a smart traffic management system.
