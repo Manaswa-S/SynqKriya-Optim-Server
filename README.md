@@ -3,6 +3,7 @@
 ---
 
 This repository contains **only the Optimization Server**, responsible for data ingestion, coordination, metric computation, and persistence.
+<br>
 The system is designed as a **decoupled, event-driven pipeline** that connects live traffic cameras with ML inference and decision-making components.
 
 ---
@@ -26,19 +27,19 @@ This repo implements the **Optimization Server**, which acts as the backbone con
 
 ---
 
-## Optimization Server Architecture
+### Optimization Server Architecture
 
 The Optimization Server is split into **three independent Go microservices**, communicating exclusively through **Redis Pub/Sub**.
 Each stage is isolated, asynchronous, and independently scalable.
 
-// INSERT THE ARCHITECTURE DIAGRAM IMAGE.
+#### Architecture Diagram 
+<img width="800px" height="500px" src="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/arch.jpg" >
 
 ---
 
-## Microservices Breakdown
+### Microservices Breakdown
 
-### 1. Pre-Optim Service  
-**Video Ingestion & Preprocessing**
+### 1. Pre-Optim Service: Video Ingestion & Preprocessing
 
 Responsible for handling raw traffic camera feeds and preparing data for ML consumption.
 
@@ -46,7 +47,7 @@ Responsible for handling raw traffic camera feeds and preparing data for ML cons
 - Accepts one or more RTSP camera stream URLs
 - Spawns **one goroutine per camera**
 - A central scheduler manages all camera routines
-- All video capture, frame sampling, clip assembly, and compression are handled using FFmpeg.
+- All video capture, frame sampling, clip assembly, and compression are handled using **FFmpeg**.
 
 For each camera:
 - Captures video feed for **X seconds**
@@ -55,8 +56,7 @@ For each camera:
 - Compresses the clip
 - Uploads the clip to **AWS S3**
 - Generates a **signed S3 URL**
-
-// INSERT A LINK TO A DEMO OUTPUT OF THIS LEVEL.
+- Demo Output: <a href="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/outputs/preoptim-detection.json"> Link </a>
 
 This metadata is published to a **Redis Pub/Sub channel**.
 
@@ -67,7 +67,6 @@ This metadata is published to a **Redis Pub/Sub channel**.
 ---
 
 ### 2. Detection & Tracking Model (External)
-
 _Not part of this repository._
 
 - Subscribes to the Pre-Optim Redis channel
@@ -77,7 +76,7 @@ _Not part of this repository._
   - additional tracking logic
 - Publishes structured inference results to another Redis channel
 
-// INSERT A LINK TO THE DEMO OUTPUT.
+- Demo Output: <a href="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/outputs/detection-midoptim.json"> Link </a>
 
 ---
 
@@ -94,10 +93,9 @@ Computed metrics include:
 - vehicle count
 - traffic density
 - congestion indicators
-- lane-wise statistics
 - flow-related metrics
 
-// INSERT A LINK TO THE OUTPUT
+- Demo Output: <a href="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/outputs/midoptim-decision.json"> Link </a>
 
 The computed metrics are published to a separate Redis channel.
 
@@ -108,18 +106,15 @@ The computed metrics are published to a separate Redis channel.
 ---
 
 ### 4. Decision-Making Model (External)
-
 _Not part of this repository._
 
 - Subscribes to the metrics channel
 - Uses ML / optimization logic to decide traffic signal changes
-
-**Important Behavior**
 - Outputs **only delta decisions**
 - Does **not** emit full system state
 - Only intersections / nodes that require changes are published
 
-// INSERT A LINK TO DEMO OUTPUT
+- Demo Output: <a href="https://github.com/Manaswa-S/SynqKriya-Optim-Server/blob/main/outputs/decision-postoptim.json"> Link </a>
 
 Decision deltas are pushed to another Redis channel.
 
@@ -128,7 +123,7 @@ Decision deltas are pushed to another Redis channel.
 ### 5. Post-Optim Service  
 **Persistence & Post-Processing**
 
-Handles final decisions and makes them durable.
+Handles final decisions, applies policies and makes them durable.
 
 **Behavior**
 - Subscribes to decision delta channel
