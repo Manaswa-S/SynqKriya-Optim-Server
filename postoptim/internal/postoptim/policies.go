@@ -123,28 +123,28 @@ func (s *PostOptim) initPolicyApplier() error {
 
 func (s *PostOptim) applyPolicies(data *MLReq) error {
 
-	// for _, update := range data.Updates {
+	for _, update := range data.Updates {
 
-	// 	policies, err := s.Queries.GetPoliciesForCameraID(s.Manager.ctx, update.CameraID)
-	// 	if err != nil {
-	// 		return err
-	// 	}
+		policies, err := s.Queries.GetPoliciesForCameraID(s.Manager.ctx, update.CameraID)
+		if err != nil {
+			return err
+		}
 
-	// 	if update.Plan.GreenTime < int64(policies.GreenMin) {
-	// 		update.Plan.GreenTime = int64(policies.GreenMin)
-	// 	}
-	// 	if update.Plan.GreenTime > int64(policies.GreenMax) {
-	// 		update.Plan.GreenTime = int64(policies.GreenMax)
-	// 	}
+		if update.Plan.GreenTime < int64(policies.GreenMin) {
+			update.Plan.GreenTime = int64(policies.GreenMin)
+		}
+		if update.Plan.GreenTime > int64(policies.GreenMax) {
+			update.Plan.GreenTime = int64(policies.GreenMax)
+		}
 
-	// 	if update.Plan.RedTime < int64(policies.RedMin) {
-	// 		update.Plan.RedTime = int64(policies.RedMin)
-	// 	}
-	// 	if update.Plan.RedTime > int64(policies.RedMax) {
-	// 		update.Plan.RedTime = int64(policies.RedMax)
-	// 	}
+		if update.Plan.RedTime < int64(policies.RedMin) {
+			update.Plan.RedTime = int64(policies.RedMin)
+		}
+		if update.Plan.RedTime > int64(policies.RedMax) {
+			update.Plan.RedTime = int64(policies.RedMax)
+		}
 
-	// }
+	}
 
 	return nil
 }

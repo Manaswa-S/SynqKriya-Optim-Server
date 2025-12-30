@@ -1,0 +1,45 @@
+{
+    "info": {
+      "uuid": "8c1a6c2f-9c14-4b7a-9c9b-3e0a5d91f312",
+      "jobId": "midoptim-job-20457",
+      "junctionId": 42,
+      "cameraId": 7,
+      "timestamp": "2025-01-12T18:43:05Z"
+    },
+    "meta": {
+      "start": "2025-01-12T18:42:00Z",
+      "end": "2025-01-12T18:42:30Z",
+      "duration": 30,
+      "frameRate": 10.0,
+      "height": 1080,
+      "width": 1920
+    },
+    "metrics": {
+      "vehicleCounts": {
+        "car": 32,
+        "bike": 11,
+        "bus": 2,
+        "truck": 3,
+        "auto": 5
+      },
+      "occupancy": 0.68,
+      "flowRate": 41,
+      "avgSpeed": 27.4,
+      "avgWaitTime": 18,
+      "avgHeadway": 2,
+      "queueLength": 14,
+      "anomalies": {
+        "wrongWay": 1,
+        "illegalParking": 0,
+        "laneViolation": 2
+      },
+      "spillOver": false,
+      "roadType": "URBAN_SIGNALIZED",
+      "confidence": 0.91
+    },
+    "systemMeta": {
+      "producer": "mid-optim-service",
+      "pipelineStage": "MID_OPTIM",
+      "lastJobId": "preoptim-job-10291"
+    }
+}

@@ -1,0 +1,77 @@
+{
+  "info": {
+    "uuid": "c3f4a2d9-6e8b-4e2c-b5c2-91c4e6f8a123",
+    "jobId": "detect-job-30981",
+    "junctionId": 42,
+    "cameraId": 7,
+    "timestamp": "2025-01-12T18:42:45Z"
+  },
+  "meta": {
+    "start": "2025-01-12T18:42:00Z",
+    "end": "2025-01-12T18:42:30Z",
+    "duration": 30,
+    "frameRate": 10.0,
+    "height": 1080,
+    "width": 1920
+  },
+  "processed_summary": {
+    "frame_summaries": [
+      {
+        "frame_id": 120,
+        "class_counts": {
+          "car": 14,
+          "bike": 6,
+          "bus": 1,
+          "truck": 2
+        },
+        "avg_speed_px_per_sec": 82.5
+      },
+      {
+        "frame_id": 240,
+        "class_counts": {
+          "car": 17,
+          "bike": 7,
+          "bus": 1,
+          "truck": 2
+        },
+        "avg_speed_px_per_sec": 79.1
+      },
+      {
+        "frame_id": 360,
+        "class_counts": {
+          "car": 19,
+          "bike": 9,
+          "bus": 2,
+          "truck": 3
+        },
+        "avg_speed_px_per_sec": 75.6
+      }
+    ],
+    "vehicle_stats": [
+      {
+        "track_id": 101,
+        "arrival_time": 2.4,
+        "exit_time": 18.9,
+        "avg_speed_px_per_sec": 86.3
+      },
+      {
+        "track_id": 102,
+        "arrival_time": 4.1,
+        "exit_time": 22.7,
+        "avg_speed_px_per_sec": 73.8
+      },
+      {
+        "track_id": 103,
+        "arrival_time": 6.8,
+        "exit_time": 29.4,
+        "avg_speed_px_per_sec": 68.2
+      }
+    ],
+    "total_vehicles": 36
+  },
+  "systemMeta": {
+    "producer": "yolo-detection-service",
+    "pipelineStage": "DETECTION",
+    "lastJobId": "preoptim-job-10291"
+  }
+}

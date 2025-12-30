@@ -1,0 +1,30 @@
+{
+    "info": {
+      "uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "jobId": "preoptim-job-10291",
+      "junctionId": 42,
+      "cameraId": 7,
+      "timestamp": "2025-01-12T18:42:30Z"
+    },
+    "meta": {
+      "start": "2025-01-12T18:42:00Z",
+      "end": "2025-01-12T18:42:30Z",
+      "duration": 30,
+      "frameRate": 10.0,
+      "height": 1080,
+      "width": 1920
+    },
+    "location": {
+      "url": "https://s3.amazonaws.com/synqkriya-clips/junction-42/camera-7/clip-10291.mp4",
+      "validFor": 900,
+      "format": "mp4",
+      "size": 1843200,
+      "checksumUrl": "https://s3.amazonaws.com/synqkriya-clips/junction-42/camera-7/clip-10291.checksum"
+    },
+    "systemMeta": {
+      "producer": "pre-optim-service",
+      "pipelineStage": "PRE_OPTIM",
+      "lastJobId": "preoptim-job-10290"
+    }
+  }
+  

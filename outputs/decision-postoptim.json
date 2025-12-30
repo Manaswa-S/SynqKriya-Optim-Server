@@ -1,0 +1,91 @@
+{
+    "info": {
+      "uuid": "f9c7b1a2-3e6d-4f89-9b71-12d6a91c4e21",
+      "jobId": "decision-job-55102",
+      "junctionId": 42,
+      "cameraId": 7,
+      "timestamp": "2025-01-12T18:43:20Z"
+    },
+    "meta": {
+      "start": "2025-01-12T18:42:00Z",
+      "end": "2025-01-12T18:42:30Z",
+      "duration": 30,
+      "frameRate": 10.0,
+      "height": 1080,
+      "width": 1920
+    },
+    "network_summary": {
+      "total_junctions": 16,
+      "updated_junctions": 3,
+      "avg_congestion_level": 0.72,
+      "critical_events": [
+        "SPILLOVER_AT_JUNCTION_42",
+        "QUEUE_BUILDUP_AT_JUNCTION_39"
+      ]
+    },
+    "updates": [
+      {
+        "cameraId": 7,
+        "plan": {
+          "cycle_length": 120,
+          "green_time": 55,
+          "yellow_time": 5,
+          "red_time": 60
+        },
+        "status": "UPDATED",
+        "confidence": 0.93,
+        "reasoning": "High queue length and sustained low average speed detected over multiple cycles.",
+        "adjustments": {
+          "priority_override": false,
+          "offset_from_baseline": 10,
+          "dynamic_rules": [
+            {
+              "rule": "QUEUE_BASED_EXTENSION",
+              "params": {
+                "threshold": 12,
+                "extension_sec": 10
+              }
+            },
+            {
+              "rule": "CONGESTION_DECAY",
+              "params": {
+                "decay_factor": 0.85
+              }
+            }
+          ]
+        },
+        "valid_until": "2025-01-12T18:48:20Z"
+      },
+      {
+        "cameraId": 9,
+        "plan": {
+          "cycle_length": 100,
+          "green_time": 45,
+          "yellow_time": 5,
+          "red_time": 50
+        },
+        "status": "UPDATED",
+        "confidence": 0.88,
+        "reasoning": "Upstream congestion propagated into junction; preventive adjustment applied.",
+        "adjustments": {
+          "priority_override": true,
+          "offset_from_baseline": 5,
+          "dynamic_rules": [
+            {
+              "rule": "EMERGENCY_CORRIDOR",
+              "params": {
+                "enabled": true
+              }
+            }
+          ]
+        },
+        "valid_until": "2025-01-12T18:46:20Z"
+      }
+    ],
+    "systemMeta": {
+      "producer": "decision-ml-service",
+      "pipelineStage": "POST_OPTIM",
+      "lastJobId": "midoptim-job-20457"
+    }
+}
+  
